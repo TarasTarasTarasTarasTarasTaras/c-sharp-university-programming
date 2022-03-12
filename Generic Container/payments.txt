@@ -1,0 +1,33 @@
+Id: 2
+Amount: 420
+Currency: usd
+PayerEmail: dwerty@gmail.com
+RequestDate: 20.02.2012 0:00:00
+DueToDate: 30.03.2013 0:00:00
+TransactionId: 12356252-12
+============================
+Id: 4
+Amount: 10000
+Currency: usd
+PayerEmail: bwerty@gmail.com
+RequestDate: 14.12.1988 0:00:00
+DueToDate: 01.01.1995 0:00:00
+TransactionId: 11112222-41
+============================
+Id: 12222
+Amount: 600
+Currency: usd
+PayerEmail: awert213y@lnu.edu.ua
+RequestDate: 01.01.2021 0:00:00
+DueToDate: 01.01.2022 0:00:00
+TransactionId: 12345678-02
+============================
+Id: 1209857
+Amount: 12421
+Currency: eur
+PayerEmail: cqrt532@gmail.com
+RequestDate: 12.02.2015 0:00:00
+DueToDate: 31.05.2018 0:00:00
+TransactionId: 21598761-12
+============================
+

@@ -1,0 +1,21 @@
+﻿Id: 5
+RecipientName: Name3
+Bank: privatbank
+PaymentType: yearly
+Amount: 30000
+PaymentDateTime: 15.03.2021 0:00:00
+============================
+Id: 4
+RecipientName: Name2
+Bank: universal_bank
+PaymentType: yearly
+Amount: 20000
+PaymentDateTime: 02.02.2014 0:00:00
+============================
+Id: 3
+RecipientName: Name1
+Bank: privatbank
+PaymentType: monthly
+Amount: 10000
+PaymentDateTime: 12.12.2012 0:00:00
+============================
