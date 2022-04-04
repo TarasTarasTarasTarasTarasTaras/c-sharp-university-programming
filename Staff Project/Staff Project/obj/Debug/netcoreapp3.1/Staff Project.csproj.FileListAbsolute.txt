@@ -1,0 +1,16 @@
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\bin\Debug\netcoreapp3.1\Staff Project.exe
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\bin\Debug\netcoreapp3.1\Staff Project.deps.json
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\bin\Debug\netcoreapp3.1\Staff Project.runtimeconfig.json
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\bin\Debug\netcoreapp3.1\Staff Project.runtimeconfig.dev.json
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\bin\Debug\netcoreapp3.1\Staff Project.dll
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\bin\Debug\netcoreapp3.1\Staff Project.pdb
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.csproj.AssemblyReference.cache
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.AssemblyInfoInputs.cache
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.AssemblyInfo.cs
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.csproj.CoreCompileInputs.cache
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.dll
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.pdb
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.genruntimeconfig.cache
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Programming\C# university\Staff Project\Staff Project\Staff Project\obj\Debug\netcoreapp3.1\Staff Project.csproj.CopyComplete
