@@ -1,0 +1,62 @@
+[
+  {
+    "Salary": 50000.0,
+    "FirstDayInCompany": "2025-11-11T00:00:00",
+    "FirstName": "Taras",
+    "LastName": "Vynar",
+    "Email": "qwerty@gmail.com",
+    "Password": "C6C463A8411DFF7576B8310F54CA6CCB75AC9354",
+    "Role": 1,
+    "Payments": [
+      {
+        "Id": 1,
+        "Amount": 10000.0,
+        "Currency": "usd",
+        "PayerEmail": "qwerty@gmail.com",
+        "RequestDate": "2022-04-03T16:18:42.5820084+03:00",
+        "DueToDate": "2025-11-11T00:00:00",
+        "TransactionId": "19231291-21",
+        "StatusOfPayment": 1
+      },
+      {
+        "Id": 210,
+        "Amount": 21000.0,
+        "Currency": "eur",
+        "PayerEmail": "qwerty@gmail.com",
+        "RequestDate": "2022-04-03T16:10:31.6485744+03:00",
+        "DueToDate": "2022-09-03T00:00:00",
+        "TransactionId": "32199121-21",
+        "StatusOfPayment": 1
+      },
+      {
+        "Id": 2112,
+        "Amount": 100000.0,
+        "Currency": "uah",
+        "PayerEmail": "qwerty@gmail.com",
+        "RequestDate": "2022-04-04T17:02:07.1961567+03:00",
+        "DueToDate": "2027-09-20T00:00:00",
+        "TransactionId": "12012829-59",
+        "StatusOfPayment": 0
+      }
+    ]
+  },
+  {
+    "FirstName": "Ivan",
+    "LastName": "Ivanenko",
+    "Email": "ivan@gmail.com",
+    "Password": "CC9F816A42431CF852CDC7A3FAD42A6F65FFCE24",
+    "Role": 0,
+    "Payments": [
+      {
+        "Id": 105,
+        "Amount": 30000.0,
+        "Currency": "eur",
+        "PayerEmail": "ivan@gmail.com",
+        "RequestDate": "2022-04-04T00:05:47.1476879+03:00",
+        "DueToDate": "2022-05-20T00:00:00",
+        "TransactionId": "21125121-15",
+        "StatusOfPayment": 2
+      }
+    ]
+  }
+]
