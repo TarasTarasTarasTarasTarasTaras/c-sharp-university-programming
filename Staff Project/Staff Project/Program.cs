@@ -24,7 +24,7 @@
                     { 4, new Action(logic.PrintAllUserPayments) },
                     { 5, new Action(logic.PrintAllUserPaymentsByFilter) },
                     { 6, new Action(logic.PrintAllApprovedPayments) },
-                    { 7, new Action(logic.EditPaymentWithDraftStatus) },
+                    { 7, new Action(logic.EditAndSendForModeration) },
                     { 8, new Action(logic.LogOut) }}
                 },
                 { "AdminMenu", new Dictionary<int, Action>() {
@@ -34,7 +34,7 @@
                     { 4, new Action(logic.PrintAllUserPayments) },
                     { 5, new Action(logic.PrintAllUserPaymentsByFilter) },
                     { 6, new Action(logic.PrintAllApprovedPayments) },
-                    { 7, new Action(logic.EditPaymentWithDraftStatus) },
+                    { 7, new Action(logic.EditAndSendForModeration) },
                     { 8, new Action(logic.LogOut) },
                     { 9, new Action(logic.AdminPanelPrintAllPayments)},
                     {10, new Action(logic.AdminPanelPrintAllRejectedPayments) },

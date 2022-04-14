@@ -1,0 +1,13 @@
+[
+  {
+    "Message": "Bad format",
+    "Id": 20220,
+    "Amount": 2020202.0,
+    "Currency": "usd",
+    "PayerEmail": "qwerty@gmail.com",
+    "RequestDate": "2022-04-04T17:02:07.1961567+03:00",
+    "DueToDate": "2022-08-12T00:00:00",
+    "TransactionId": "12121212-12",
+    "StatusOfPayment": 2
+  }
+]

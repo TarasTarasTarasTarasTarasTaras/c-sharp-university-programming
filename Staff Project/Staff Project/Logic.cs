@@ -15,11 +15,13 @@
         public User User { get; private set; }
         public IMenu Menu { get; private set; }
         public List<User> AllUsers { get; private set; }
+        public List<Respond> Responds { get; private set; }
 
         public Logic()
         {
             Menu = new BaseMenu();
             ReadAllUsers();
+            ReadAllResponds();
         }
 
         public Tuple<string, int> PrintMenu()
@@ -83,7 +85,7 @@
             if (User.Role != Role.Admin && !CheckIsStaffUser()) return;
             Console.WriteLine("\n------- Edit payment with draft status -------");
 
-            int paymentNumber = SelectIndexPaymentWithDraftStatus(User.Payments);
+            int paymentNumber = SelectIndexPaymentByStatus(User.Payments, StatusOfPayment.Draft);
 
             if (paymentNumber == 0) return; // if cancel
 
@@ -97,7 +99,7 @@
             if (User.Role != Role.Admin && !CheckIsStaffUser()) return;
             Console.WriteLine("\n------- Delete payment with draft status -------");
 
-            int paymentNumber = SelectIndexPaymentWithDraftStatus(User.Payments);
+            int paymentNumber = SelectIndexPaymentByStatus(User.Payments, StatusOfPayment.Draft);
 
             if (paymentNumber == 0) return; // if cancel
             User.Payments.RemoveAt(paymentNumber - 1);
@@ -137,6 +139,21 @@
             }
         }
 
+        public void EditAndSendForModeration()
+        {
+            int index = SelectIndexPaymentByStatus(User.Payments, StatusOfPayment.Rejected);
+            if (index == 0) return;
+
+            Respond respond = Helpers.GetRespondFromRejectedPayments(Responds, User.Payments[index - 1]);
+            Responds.Remove(respond);
+
+            SetPropertiesForPayment(User.Payments[index - 1]);
+            User.Payments[index - 1].StatusOfPayment = StatusOfPayment.Draft;
+
+            WriteUsersToFile();
+            WriteRespondsToFile();
+        }
+
         public void AdminPanelPrintAllPayments()
         {
             List<Payment> payments = AdminPanelGetAllPayments();
@@ -150,7 +167,7 @@
             List<Payment> allPayments = AdminPanelGetAllPaymentsByFilter(StatusOfPayment.Draft);
 
             Console.WriteLine("\n------- [Admin Panel] Set status of payments with draft status -------");
-            int paymentNumber = SelectIndexPaymentWithDraftStatus(allPayments);
+            int paymentNumber = SelectIndexPaymentByStatus(allPayments, StatusOfPayment.Draft);
 
             if (paymentNumber == 0) return; // if cancel
             AdminPanelSetStatusOfPayment(allPayments[paymentNumber - 1]);
@@ -171,6 +188,11 @@
             {
                 Console.WriteLine($"----- Payment Number {i} -----");
                 Console.Write(payments[i - 1]);
+                if (payments[i - 1].StatusOfPayment == StatusOfPayment.Rejected)
+                {
+                    string message = Helpers.GetRespondFromRejectedPayments(Responds, payments[i - 1]).Message;
+                    Console.WriteLine($" --> Message: {message}");
+                }
                 Console.WriteLine("------------------------------\n");
             }
         }
@@ -183,6 +205,11 @@
                 {
                     Console.WriteLine($"----- Payment Number {i} -----");
                     Console.Write(payments[i - 1]);
+                    if(filter == StatusOfPayment.Rejected)
+                    {
+                        string message = Helpers.GetRespondFromRejectedPayments(Responds, payments[i - 1]).Message;
+                        Console.WriteLine($" --> Message: {message}");
+                    }
                     Console.WriteLine("------------------------------\n");
                 }
             }
@@ -211,19 +238,20 @@
             return payments;
         }
 
-        private int SelectIndexPaymentWithDraftStatus(List<Payment> payments)
+        private int SelectIndexPaymentByStatus(List<Payment> payments, StatusOfPayment status)
         {
             int paymentNumber = -1, numberOfPayments = payments.Count;
             do
             {
-                PrintAllUserPaymentsByFilter(payments, StatusOfPayment.Draft);
+                PrintAllUserPaymentsByFilter(payments, status);
                 Console.WriteLine("  >> Enter 0 if you want to cancel editing");
                 try
                 {
                     Console.Write(" Payment No: ");
                     paymentNumber = int.Parse(Console.ReadLine());
-                    if (payments[paymentNumber].StatusOfPayment != StatusOfPayment.Draft)
-                        continue;
+                    if (paymentNumber == 0) return 0;
+                    if (payments[paymentNumber - 1].StatusOfPayment != status)
+                        paymentNumber = -1;
                 }
                 catch { continue; }
             } while (paymentNumber < 0 || paymentNumber - 1 >= numberOfPayments);
@@ -309,6 +337,27 @@
             } while (status < 0 || status > numberOfPaymentStatuses);
 
             payment.StatusOfPayment = (StatusOfPayment)status;
+            if(payment.StatusOfPayment == StatusOfPayment.Rejected)
+            {
+                Console.Write(" Enter your message: ");
+                string message = Console.ReadLine();
+
+                Respond respond = new Respond
+                {
+                    Id = payment.Id,
+                    Amount = payment.Amount,
+                    Currency = payment.Currency,
+                    PayerEmail = payment.PayerEmail,
+                    RequestDate = payment.RequestDate,
+                    DueToDate = payment.DueToDate,
+                    TransactionId = payment.TransactionId,
+                    StatusOfPayment = payment.StatusOfPayment,
+                    Message = message
+                };
+
+                Responds.Add(respond);
+                WriteRespondsToFile();
+            }
         }
 
         private void ReadAllUsers()
@@ -336,7 +385,32 @@
             File.WriteAllText(_pathUsersFile, jsonUsers);
         }
 
+        private void ReadAllResponds()
+        {
+            if (!File.Exists(_pathRespondsFile))
+                File.Create(_pathRespondsFile).Close();
+
+            try
+            {
+                string jsonResponds = File.ReadAllText(_pathRespondsFile);
+
+                Responds = JsonConvert.DeserializeObject<List<Respond>>(jsonResponds);
+            }
+            catch { Responds = new List<Respond>(); }
+        }
+
+        private void WriteRespondsToFile()
+        {
+            string jsonResponds = JsonConvert.SerializeObject(Responds, new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            File.WriteAllText(_pathRespondsFile, jsonResponds);
+        }
+
         private const string _pathUsersFile = "../../../Data/users.json";
+        private const string _pathRespondsFile = "../../../Data/responds.json";
         private readonly string[] _notEnteredForPayment = new string[] { "PayerEmail", "StatusOfPayment", "RequestDate" };
     }
 }

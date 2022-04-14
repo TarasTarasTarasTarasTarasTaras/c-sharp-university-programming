@@ -69,6 +69,8 @@
                 password = Console.ReadLine();
             } while (PasswordIsNotValid(password));
 
+            password = GetHash(password);
+
             Dictionary<string, string> data = new Dictionary<string, string>();
             data["firstName"] = firstName;
             data["lastName"] = lastName;
@@ -87,6 +89,19 @@
                 property.SetValue(payment, int.Parse(value));
             else
                 property.SetValue(payment, value);
+        }
+
+        public static Respond GetRespondFromRejectedPayments(List<Respond> responds, Payment payment)
+        {
+            return
+                responds
+                .FirstOrDefault(r => r.Id == payment.Id &&
+                                     r.Amount == payment.Amount &&
+                                     r.Currency == payment.Currency &&
+                                     r.PayerEmail == payment.PayerEmail &&
+                                     r.RequestDate == payment.RequestDate &&
+                                     r.DueToDate == payment.DueToDate &&
+                                     r.TransactionId == payment.TransactionId);
         }
 
         private static string GetHash(string password)
