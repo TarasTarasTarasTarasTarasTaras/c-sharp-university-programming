@@ -7,7 +7,7 @@ namespace StaffProjectAPI.Services
 {
     public interface IPaymentService
     {
-        List<Payment> GetAllPayments();
+        List<Payment> GetAllPayments(string sort_by, string sort_type, string s);
 
         ActionResult<Payment> GetPaymentById(int id);
 

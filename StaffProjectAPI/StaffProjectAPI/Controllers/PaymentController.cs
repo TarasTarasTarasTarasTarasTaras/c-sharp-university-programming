@@ -17,9 +17,11 @@ namespace StaffProjectAPI.Controllers
         }
 
         [HttpGet]
-        public List<Payment> GetAllPayments()
+        public List<Payment> GetAllPayments(string? sort_by = null, string? sort_type = null, string? s = null)
         {
-            return _paymentService.GetAllPayments();
+            var payments = _paymentService.GetAllPayments(sort_by, sort_type, s);
+
+            return payments;
         }
 
         [HttpGet]

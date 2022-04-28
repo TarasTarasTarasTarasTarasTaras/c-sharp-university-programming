@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StaffProjectAPI.Controllers;
 using StaffProjectAPI.Data;
 using StaffProjectAPI.Repositories;
 using StaffProjectAPI.Responses;
@@ -15,9 +14,42 @@ namespace StaffProjectAPI.Services
             _repositoryPayment = repository;
         }
 
-        public List<Payment> GetAllPayments()
+        public List<Payment> GetAllPayments(string sort_by, string sort_type, string s)
         {
-            return _repositoryPayment.GetPaymentList().ToList();
+            var payments = _repositoryPayment.GetPaymentList().ToList();
+
+            if (sort_by != null)
+            {
+                var property =
+                    typeof(Payment)
+                    .GetProperties()
+                    .FirstOrDefault(prop => prop.Name.ToLower() == sort_by?.ToLower());
+
+                if (property != null)
+                {
+                    if (sort_type.ToLower() == "asc")
+                        payments = payments.OrderBy(x => property.GetValue(x)).ToList();
+                    else if (sort_type.ToLower() == "desc")
+                        payments = payments.OrderByDescending(x => property.GetValue(x)).ToList();
+                }
+            }
+            
+            if (s != null)
+            {
+                var properties = typeof(Payment).GetProperties();
+                var searchedPayments = new List<Payment>();
+
+                foreach(Payment payment in payments)
+                    foreach(var property in properties)
+                        if (property.GetValue(payment).ToString().ToLower().Contains(s.ToLower()))
+                        {
+                            searchedPayments.Add(payment);
+                            break;
+                        }
+                return searchedPayments;
+            }
+
+            return payments;
         }
 
         public ActionResult<Payment> GetPaymentById(int id)
